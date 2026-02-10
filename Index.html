@@ -1,394 +1,357 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <title>Trust Wallet BD</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trust Wallet BD — Exchange</title>
+
+  <!-- Styles -->
   <style>
-    /* Animated gradient background */
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin:0; padding:0;
-      background: linear-gradient(-45deg, #0f172a, #1e3a8a, #2563eb, #facc15);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color:#333;
-    }
-    @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
+    :root{
+      --navy:#0b1220;
+      --deep-blue:#0f2a66;
+      --gold:#f6c84c;
+      --muted:#f3f6f9;
+      --card:#ffffff;
+      --accent:#0f172a;
+      --glass: rgba(255,255,255,0.06);
     }
 
-    header {
-      text-align:center;
-      padding:30px 20px;
-      color:white;
+    /* Page background animated gradient */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(120deg, var(--navy) 0%, var(--deep-blue) 40%, #1e3a8a 60%, #0f172a 100%);
+      color:var(--accent);
+      background-size: 300% 300%;
+      animation: bgShift 18s ease infinite;
+      line-height:1.45;
     }
-    header h1 { margin:0; font-size:36px; font-weight:bold; }
-    header p { margin:10px 0 0; font-size:18px; }
-
-    .contact { margin-top:15px; }
-    .contact a {
-      display:inline-block; margin:5px; padding:10px 20px;
-      background:#facc15; color:#0f172a; text-decoration:none;
-      border-radius:6px; font-weight:bold;
-      transition:0.3s;
-    }
-    .contact a:hover { background:#f59e0b; color:white; }
-
-    .banner { margin-top:20px; }
-    .banner img { max-width:200px; border-radius:8px; }
-
-    .container {
-      max-width:1000px; margin:20px auto; padding:20px;
-      background:white; border-radius:10px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    }
-    h2 { margin-bottom:15px; color:#1e3a8a; }
-
-    ul { list-style:none; padding:0; }
-    li {
-      background:#f1f5f9; border:1px solid #ddd;
-      border-radius:6px; padding:12px; margin-bottom:10px;
-      animation: fadeIn 1s ease;
-    }
-    @keyframes fadeIn {
-      from {opacity:0; transform:translateY(10px);}
-      to {opacity:1; transform:translateY(0);}
+    @keyframes bgShift{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
     }
 
-    .rate-table { width:100%; border-collapse:collapse; margin-top:10px; }
-    .rate-table th, .rate-table td {
-      border:1px solid #ddd; padding:10px; text-align:center;
+    /* Layout */
+    .wrap{max-width:1100px;margin:28px auto;padding:18px;}
+    header.site{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius:12px;padding:18px 20px;box-shadow:0 8px 30px rgba(2,6,23,0.45);
+      backdrop-filter: blur(6px);
     }
-    .rate-table th { background:#1e3a8a; color:white; }
+    .brand{
+      display:flex;align-items:center;gap:14px;
+    }
+    .logo{
+      width:72px;height:72px;border-radius:10px;overflow:hidden;
+      background:linear-gradient(135deg,var(--gold),#ffd97a);
+      display:flex;align-items:center;justify-content:center;color:var(--navy);
+      font-weight:700;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    }
+    .brand h1{margin:0;font-size:20px;color:var(--gold);letter-spacing:0.2px;}
+    .brand p{margin:0;font-size:13px;color:#dbe7ff;opacity:0.95;}
 
-    .message-box {
-      background:#e0f2fe; padding:15px; border-radius:6px;
-      margin-top:20px; color:#1e40af; font-weight:bold; text-align:center;
-      animation: pulse 2s infinite;
+    /* Contact (top) */
+    .top-contact{display:flex;gap:10px;align-items:center;}
+    .contact-btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;
+      background:var(--gold);color:var(--navy);font-weight:600;text-decoration:none;
+      box-shadow:0 6px 18px rgba(246,200,76,0.12);transition:transform .18s ease, box-shadow .18s ease;
     }
-    @keyframes pulse {
-      0% {transform:scale(1);}
-      50% {transform:scale(1.05);}
-      100% {transform:scale(1);}
+    .contact-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,23,42,0.25);}
+
+    /* Main content cards */
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:18px;}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.12);}
+
+    /* Rates table */
+    .rates table{width:100%;border-collapse:collapse;font-size:14px;}
+    .rates th, .rates td{padding:10px 12px;border-bottom:1px solid #eef3fb;text-align:center;}
+    .rates th{background:linear-gradient(90deg,var(--deep-blue),var(--navy));color:white;border-radius:6px;font-weight:700;}
+    .rate-badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--muted);font-weight:700;color:var(--accent);}
+
+    /* Why us */
+    .why ul{padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+    .why li{list-style:none;background:linear-gradient(180deg,#fbfdff,#f6f9ff);padding:12px;border-radius:8px;font-weight:600;color:#0f172a;box-shadow:inset 0 -2px 0 rgba(0,0,0,0.02);}
+
+    /* History animated list */
+    .history{height:360px;overflow:hidden;position:relative;}
+    .history-list{position:absolute;top:0;left:0;right:0;display:flex;flex-direction:column;gap:10px;padding:6px 2px;}
+    .history-item{
+      display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;
+      background:linear-gradient(90deg,#ffffff,#f7fbff);border:1px solid #e6eefb;box-shadow:0 6px 18px rgba(15,23,42,0.04);
+      transform-origin:left center;opacity:0;animation:slideIn .6s forwards;
+    }
+    @keyframes slideIn{
+      from{opacity:0;transform:translateX(-12px) scale(0.995);}
+      to{opacity:1;transform:translateX(0) scale(1);}
+    }
+    .history-meta{font-size:13px;color:#0f172a;font-weight:700;}
+    .history-time{font-size:12px;color:#6b7280;}
+
+    /* Auto-scroll effect */
+    .history-mask{height:360px;overflow:hidden;position:relative;}
+    .history-list.scrolling{animation:scrollUp linear infinite;}
+    @keyframes scrollUp{
+      0%{transform:translateY(0);}
+      100%{transform:translateY(-50%);} /* will duplicate list for seamless loop */
     }
 
-    @media(max-width:600px){
-      header h1 { font-size:24px; }
-      header p { font-size:16px; }
-      .rate-table th, .rate-table td { font-size:14px; padding:6px; }
+    /* Notification box */
+    .notify{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .notify .box{flex:1;padding:12px;border-radius:10px;background:linear-gradient(90deg,#eef8ff,#f7fbff);font-weight:700;color:var(--deep-blue);box-shadow:0 8px 20px rgba(2,6,23,0.06);}
+
+    /* Footer small */
+    footer{margin-top:18px;text-align:center;color:#dbe7ff;font-size:13px;opacity:0.9;}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr; }
+      .history{height:300px;}
+      .history-mask{height:300px;}
+    }
+    @media (max-width:520px){
+      .brand h1{font-size:18px;}
+      .brand p{font-size:12px;}
+      .logo{width:56px;height:56px;font-size:16px;}
+      .contact-btn{padding:8px 12px;font-size:13px;}
+      .history{height:260px;}
+      .history-mask{height:260px;}
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
 
-<header>
-  <h1>Trust Wallet BD</h1>
-  <p>Bkash, Nagad, Rocket থেকে সহজে USDT, USDC, Ton Coin</p>
-  
-  <!-- Contact Section -->
-  <div class="contact">
-    <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
-    <a href="https://m.me/Exchangepartner" target="_blank">Messenger @Exchangepartner</a>
+    <!-- Header with contact first -->
+    <header class="site" role="banner" aria-label="Trust Wallet BD header">
+      <div class="brand" aria-hidden="false">
+        <div class="logo" aria-hidden="true">TWB</div>
+        <div>
+          <h1>Trust Wallet BD</h1>
+          <p>Bkash · Nagad · Rocket → USDT · USDC · TON</p>
+        </div>
+      </div>
+
+      <div class="top-contact" aria-hidden="false">
+        <a class="contact-btn" href="https://t.me/Exchangepartner" target="_blank" rel="noopener noreferrer" aria-label="Contact on Telegram">
+          Telegram
+        </a>
+        <a class="contact-btn" href="https://m.me/Exchangepartner" target="_blank" rel="noopener noreferrer" aria-label="Contact on Messenger">
+          Messenger
+        </a>
+      </div>
+    </header>
+
+    <!-- Main grid -->
+    <main class="grid" role="main">
+
+      <!-- Left column: rates, why, notifications -->
+      <section class="card" aria-labelledby="rates-title">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <h2 id="rates-title">বর্তমান এক্সচেঞ্জ রেট</h2>
+          <div style="font-size:13px;color:#6b7280;">আপডেটেড (ডেমো)</div>
+        </div>
+
+        <div class="rates" role="table" aria-label="Exchange rates">
+          <table>
+            <thead>
+              <tr>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Bkash</td><td>USDT</td><td><span class="rate-badge">1৳ = 0.009 USDT</span></td></tr>
+              <tr><td>Bkash</td><td>USDC</td><td><span class="rate-badge">1৳ = 0.009 USDC</span></td></tr>
+              <tr><td>Nagad</td><td>USDT</td><td><span class="rate-badge">1৳ = 0.008 USDT</span></td></tr>
+              <tr><td>Nagad</td><td>Ton Coin</td><td><span class="rate-badge">1৳ = 0.007 TON</span></td></tr>
+              <tr><td>Rocket</td><td>USDC</td><td><span class="rate-badge">1৳ = 0.009 USDC</span></td></tr>
+              <tr><td>Rocket</td><td>Ton Coin</td><td><span class="rate-badge">1৳ = 0.007 TON</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr style="margin:18px 0;border:none;border-top:1px solid #eef6ff;" />
+
+        <div class="why" aria-labelledby="why-title">
+          <h2 id="why-title">কেন আমাদের থেকে এক্সচেঞ্জ করবেন?</h2>
+          <ul>
+            <li>🔐 100% Trusted & Verified</li>
+            <li>⚡ Instant & Smooth Process</li>
+            <li>📞 24/7 Support via Telegram/Messenger</li>
+            <li>🛡️ Secure verification before release</li>
+          </ul>
+        </div>
+
+        <hr style="margin:18px 0;border:none;border-top:1px solid #eef6ff;" />
+
+        <div class="notify" aria-live="polite">
+          <div class="box">প্রথমে যোগাযোগ করুন — আমাদের সিস্টেমে ম্যানুয়ালি ভেরিফাই করা হয়।</div>
+          <div style="min-width:120px;text-align:right;">
+            <div style="font-size:12px;color:#6b7280;">Support</div>
+            <div style="font-weight:800;color:var(--deep-blue);">Telegram / Messenger</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column: history + banner -->
+      <aside>
+        <div class="card" style="margin-bottom:18px;">
+          <h2 style="margin-top:0;">সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
+
+          <!-- history mask for auto-scroll -->
+          <div class="history-mask" aria-hidden="false">
+            <div id="history" class="history-list history-list--initial">
+              <!-- JS will populate and duplicate for seamless scroll -->
+            </div>
+          </div>
+
+          <div style="margin-top:12px;font-size:13px;color:#6b7280;">Showing recent transactions (100৳ → 15,000৳)</div>
+        </div>
+
+        <div class="card" style="text-align:center;">
+          <img src="https://via.placeholder.com/320x140.png?text=Trust+Wallet+BD+Banner" alt="Trust Wallet BD banner" style="width:100%;border-radius:8px;display:block;margin-bottom:12px;">
+          <div style="font-weight:700;color:var(--deep-blue);margin-bottom:6px;">Trust Wallet BD</div>
+          <div style="font-size:13px;color:#6b7280;">Contact first to start exchange. Manual verification required.</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div style="max-width:1100px;margin:18px auto;color:#e6f0ff;opacity:0.9;">
+        © <strong>Trust Wallet BD</strong> — Contact: <a href="https://t.me/Exchangepartner" style="color:var(--gold);text-decoration:none;">@Exchangepartner</a> · <a href="https://m.me/Exchangepartner" style="color:var(--gold);text-decoration:none;">@Exchangepartner</a>
+      </div>
+    </footer>
   </div>
 
-  <!-- Logo/Banner Placeholder -->
-  <div class="banner">
-    <img src="https://via.placeholder.com/200x80.png?text=Trust+Wallet+BD+Logo" alt="Trust Wallet BD Logo">
-  </div>
-</header>
+  <!-- Scripts -->
+  <script>
+    /* ---------- Dummy history dataset (many entries 100৳ → 15000৳) ---------- */
+    const dummyHistory = [
+      {user:"Rahim",from:"Bkash",to:"USDT",amount:100,time:"১ মিনিট আগে"},
+      {user:"Sadia",from:"Nagad",to:"USDT",amount:200,time:"২ মিনিট আগে"},
+      {user:"Sabbir",from:"Rocket",to:"USDC",amount:350,time:"৩ মিনিট আগে"},
+      {user:"Karim",from:"Bkash",to:"USDT",amount:500,time:"৫ মিনিট আগে"},
+      {user:"Nusrat",from:"Nagad",to:"Ton Coin",amount:750,time:"৭ মিনিট আগে"},
+      {user:"Mitu",from:"Bkash",to:"USDC",amount:1000,time:"১০ মিনিট আগে"},
+      {user:"Rafiq",from:"Rocket",to:"USDT",amount:1500,time:"১৫ মিনিট আগে"},
+      {user:"Jahan",from:"Bkash",to:"USDT",amount:2000,time:"২০ মিনিট আগে"},
+      {user:"Shakib",from:"Nagad",to:"Ton Coin",amount:2500,time:"২৫ মিনিট আগে"},
+      {user:"Fahim",from:"Rocket",to:"USDC",amount:3000,time:"৩০ মিনিট আগে"},
+      {user:"Tania",from:"Bkash",to:"USDT",amount:3500,time:"৩৫ মিনিট আগে"},
+      {user:"Rina",from:"Nagad",to:"USDT",amount:4000,time:"৪০ মিনিট আগে"},
+      {user:"Sultan",from:"Rocket",to:"Ton Coin",amount:4500,time:"৪৫ মিনিট আগে"},
+      {user:"Morshed",from:"Bkash",to:"USDC",amount:5000,time:"৫০ মিনিট আগে"},
+      {user:"Anika",from:"Nagad",to:"USDT",amount:6000,time:"৫৫ মিনিট আগে"},
+      {user:"Babu",from:"Rocket",to:"USDC",amount:7000,time:"১ ঘন্টা আগে"},
+      {user:"Shuvo",from:"Bkash",to:"USDT",amount:8000,time:"১.৫ ঘন্টা আগে"},
+      {user:"Rafi",from:"Nagad",to:"Ton Coin",amount:9000,time:"২ ঘন্টা আগে"},
+      {user:"Jewel",from:"Rocket",to:"USDT",amount:10000,time:"৩ ঘন্টা আগে"},
+      {user:"Nabila",from:"Bkash",to:"USDC",amount:12000,time:"৪ ঘন্টা আগে"},
+      {user:"Rashed",from:"Nagad",to:"USDT",amount:15000,time:"৫ ঘন্টা আগে"}
+    ];
 
-<div class="container">
-  <h2>কেন আমাদের থেকে এক্সচেঞ্জ করবেন?</h2>
-  <ul>
-    <li>🔐 100% Trusted Exchange</li>
-    <li>⚡ Instant Transaction</li>
-    <li>📞 24/7 Support</li>
-    <li>💬 Telegram & Messenger এ নোটিফাই</li>
-  </ul>
-</div>
+    /* ---------- Render history items with animation and auto-scroll ---------- */
+    const historyContainer = document.getElementById('history');
 
-<div class="container">
-  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
-  <table class="rate-table">
-    <tr>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Rate</th>
-    </tr>
-    <tr><td>Bkash</td><td>USDT</td><td>1৳ = 0.009 USDT</td></tr>
-    <tr><td>Nagad</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-    <tr><td>Rocket</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Bkash</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Nagad</td><td>USDT</td><td>1৳ = 0.008 USDT</td></tr>
-    <tr><td>Rocket</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-  </table>
-</div>
-
-<div class="container">
-  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
-  <ul id="history-list"></ul>
-</div>
-
-<div class="container">
-  <h2>Random Notification</h2>
-  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
-</div>
-
-<script>
-  // Dummy history data (100৳ থেকে 15000৳ পর্যন্ত)
-  const historyData = [
-    { user:"Rahim", from:"Bkash", to:"USDT", amount:"100৳", time:"৫ মিনিট আগে" },
-    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"500৳", time:"১০ মিনিট আগে" },
-    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"1200৳", time:"১৫ মিনিট আগে" },
-    { user:"Karim", from:"Bkash", to:"USDT", amount:"2500৳", time:"২০ মিনিট আগে" },
-    { user:"Mitu", from:"Nagad", to:"USDC", amount:"4000৳", time:"৩০ মিনিট আগে" },
-    { user:"Shakib", from:"Rocket", to:"Ton Coin", amount:"7500৳", time:"৪০ মিনিট আগে" },
-    { user:"Jahan", from:"Bkash", to:"USDT", amount:"10000৳", time:"৫০ মিনিট আগে" },
-    { user:"Rafiq", from:"Nagad", to:"USDT", amount:"15000৳", time:"১ ঘন্টা আগে" }
-  ];
-  const historyList = document.getElementById("history-list");
-
-  // Animated history rendering
-  let index=0;
-  function showHistory(){
-    if(index < historyData.length){
-      const entry = historyData[index];
-      const li=document.createElement("li");
-      li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
-      historyList.appendChild(li);
-      index++;
+    function createItem(entry){
+      const el = document.createElement('div');
+      el.className = 'history-item';
+      el.innerHTML = `
+        <div>
+          <div class="history-meta">${entry.user} • <span style="font-weight:600;color:#0f172a">${entry.from} → ${entry.to}</span></div>
+          <div class="history-time">${entry.time}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:800;color:var(--deep-blue);">${entry.amount}৳</div>
+        </div>`;
+      return el;
     }
-  }
-  setInterval(showHistory, 2000); // প্রতি ২ সেকেন্ডে নতুন history add হবে
 
-  // Random notification simulation
-  const messages=[
-    "Rahim just exchanged 100৳ to USDT ✅",  
-  <!-- Contact Section -->
-  <div class="contact">
-    <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
-    <a href="https://m.me/Exchangepartner" target="_blank">Messenger @Exchangepartner</a>
-  </div>
+    // populate list twice for seamless scroll
+    function populateHistory(){
+      historyContainer.innerHTML = '';
+      // first pass
+      dummyHistory.forEach(d => historyContainer.appendChild(createItem(d)));
+      // duplicate for continuous scroll
+      dummyHistory.forEach(d => historyContainer.appendChild(createItem(d)));
+    }
+    populateHistory();
 
-  <!-- Logo/Banner Placeholder -->
-  <div class="banner">
-    <img src="https://via.placeholder.com/200x80.png?text=Trust+Wallet+BD+Logo" alt="Trust Wallet BD Logo">
-  </div>
-</header>
+    // start auto-scroll by adding CSS animation with duration based on content height
+    function startAutoScroll(){
+      const list = historyContainer;
+      // compute total height of one set
+      const items = list.children;
+      let halfHeight = 0;
+      const halfCount = items.length / 2;
+      for(let i=0;i<halfCount;i++){
+        halfHeight += items[i].offsetHeight + 10; // gap
+      }
+      // duration: 0.02s per px (adjust for speed)
+      const duration = Math.max(18, Math.round(halfHeight * 0.02));
+      list.style.animation = `scrollUp ${duration}s linear infinite`;
+      // ensure keyframes use computed translate (we used -50% earlier; override with transform)
+      // fallback: if JS can't compute, keep manual interval
+    }
 
-<div class="container">
-  <h2>কেন আমাদের থেকে এক্সচেঞ্জ করবেন?</h2>
-  <ul>
-    <li>🔐 100% Trusted Exchange</li>
-    <li>⚡ Instant Transaction</li>
-    <li>📞 24/7 Support</li>
-    <li>💬 Telegram & Messenger এ নোটিফাই</li>
-  </ul>
-</div>
+    // Wait for layout then start
+    window.addEventListener('load', () => {
+      // small delay to allow fonts/images
+      setTimeout(startAutoScroll, 300);
+    });
 
-<div class="container">
-  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
-  <table class="rate-table">
-    <tr>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Rate</th>
-    </tr>
-    <tr><td>Bkash</td><td>USDT</td><td>1৳ = 0.009 USDT</td></tr>
-    <tr><td>Nagad</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-    <tr><td>Rocket</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Bkash</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Nagad</td><td>USDT</td><td>1৳ = 0.008 USDT</td></tr>
-    <tr><td>Rocket</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-  </table>
-</div>
+    /* ---------- Live-like notifications (rotating) ---------- */
+    const messages = [
+      "Rahim exchanged 100৳ to USDT ✅",
+      "Nusrat converted 500৳ to Ton Coin ⚡",
+      "Sabbir exchanged 1200৳ to USDC 🔐",
+      "Karim exchanged 2500৳ to USDT 💬",
+      "Mitu converted 4000৳ to USDC ✅",
+      "Shakib exchanged 7500৳ to Ton Coin ⚡",
+      "Jahan exchanged 10000৳ to USDT 🔐",
+      "Rafiq exchanged 15000৳ to USDT 💬"
+    ];
+    let mi = 0;
+    const notifyBox = document.querySelector('.message-box') || null;
+    // create a visible message box if not present
+    if(!notifyBox){
+      const el = document.createElement('div');
+      el.className = 'message-box';
+      el.id = 'notify';
+      el.textContent = '📩 Notifications will appear here';
+      document.querySelector('.wrap').appendChild(el);
+    }
+    const box = document.getElementById('notify') || document.querySelector('.message-box');
+    setInterval(()=>{
+      if(box) box.textContent = '📩 ' + messages[mi];
+      mi = (mi + 1) % messages.length;
+    }, 4500);
 
-<div class="container">
-  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
-  <ul id="history-list"></ul>
-</div>
+    /* ---------- Accessibility: pause scroll on hover/focus ---------- */
+    const mask = document.querySelector('.history-mask');
+    mask.addEventListener('mouseenter', () => { historyContainer.style.animationPlayState = 'paused'; });
+    mask.addEventListener('mouseleave', () => { historyContainer.style.animationPlayState = 'running'; });
+    mask.addEventListener('focusin', () => { historyContainer.style.animationPlayState = 'paused'; });
+    mask.addEventListener('focusout', () => { historyContainer.style.animationPlayState = 'running'; });
 
-<div class="container">
-  <h2>Random Notification</h2>
-  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
-</div>
-
-<script>
-  // Dummy history data (100৳ থেকে 15000৳ পর্যন্ত)
-  const historyData = [
-    { user:"Rahim", from:"Bkash", to:"USDT", amount:"100৳", time:"৫ মিনিট আগে" },
-    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"500৳", time:"১০ মিনিট আগে" },
-    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"1200৳", time:"১৫ মিনিট আগে" },
-    { user:"Karim", from:"Bkash", to:"USDT", amount:"2500৳", time:"২০ মিনিট আগে" },
-    { user:"Mitu", from:"Nagad", to:"USDC", amount:"4000৳", time:"৩০ মিনিট আগে" },
-    { user:"Shakib", from:"Rocket", to:"Ton Coin", amount:"7500৳", time:"৪০ মিনিট আগে" },
-    { user:"Jahan", from:"Bkash", to:"USDT", amount:"10000৳", time:"৫০ মিনিট আগে" },
-    { user:"Rafiq", from:"Nagad", to:"USDT", amount:"15000৳", time:"১ ঘন্টা আগে" }
-  ];
-  const historyList = document.getElementById("history-list");
-  historyData.forEach(entry=>{
-    const li=document.createElement("li");
-    li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
-    historyList.appendChild(li);
-  });
-
-  // Random notification simulation
-  const messages=[
-    "Rahim just exchanged 100৳ to USDT ✅",
-    "Nusrat converted 500৳ to Ton Coin ⚡",
-    "Sabbir exchanged 1200৳ to USDC 🔐",
-    "Karim exchanged 2500৳ to USDT 💬",
-    "Mitu converted 4000৳ to USDC ✅",
-    "Shakib exchanged 7500৳ to Ton Coin ⚡",
-    "Jahan exchanged 10000৳ to USDT 🔐",
-    "Rafiq exchanged 15000৳ to USDT 💬"
-  ];
-  let i=0;
-  setInterval(()=>{
-    document.getElementById("message-box").innerText="📩 "+messages[i];
-    i=(i+1)%messages.length;
-  },5000);
-</script>
-
-</body>
-</html><div class="container">
-  <h2>কেন আমাদের থেকে এক্সচেঞ্জ করবেন?</h2>
-  <ul>
-    <li>🔐 100% Trusted Exchange</li>
-    <li>⚡ Instant Transaction</li>
-    <li>📞 24/7 Support</li>
-    <li>💬 Telegram & Messenger এ নোটিফাই</li>
-  </ul>
-</div>
-
-<div class="container">
-  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
-  <table class="rate-table">
-    <tr>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Rate</th>
-    </tr>
-    <tr><td>Bkash</td><td>USDT</td><td>1৳ = 0.009 USDT</td></tr>
-    <tr><td>Nagad</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-    <tr><td>Rocket</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Bkash</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
-    <tr><td>Nagad</td><td>USDT</td><td>1৳ = 0.008 USDT</td></tr>
-    <tr><td>Rocket</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
-  </table>
-</div>
-
-<div class="container">
-  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
-  <ul id="history-list"></ul>
-</div>
-
-<div class="container">
-  <h2>Random Notification</h2>
-  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
-</div>
-
-<div class="container contact">
-  <h2>যোগাযোগ করুন</h2>
-  <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
-  <a href="https://m.me/Exchangepartner" target="_blank">Messenger @Exchangepartner</a>
-</div>
-
-<script>
-  // Dummy history data
-  const historyData = [
-    { user:"Rahim", from:"Bkash", to:"USDT", amount:"1200৳", time:"৫ মিনিট আগে" },
-    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"850৳", time:"১০ মিনিট আগে" },
-    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"2000৳", time:"১৫ মিনিট আগে" }
-  ];
-  const historyList = document.getElementById("history-list");
-  historyData.forEach(entry=>{
-    const li=document.createElement("li");
-    li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
-    historyList.appendChild(li);
-  });
-
-  // Random notification simulation
-  const messages=[
-    "Rahim just exchanged 1200৳ to USDT ✅",
-    "Nusrat converted 850৳ to Ton Coin ⚡",
-    "Sabbir exchanged 2000৳ to USDC 🔐",
-    "New user exchanged 500৳ to USDT 💬"
-  ];
-  let i=0;
-  setInterval(()=>{
-    document.getElementById("message-box").innerText="📩 "+messages[i];
-    i=(i+1)%messages.length;
-  },5000);
-</script>
-
-</body>
-</html><div class="container">
-  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
-  <table class="rate-table">
-    <tr>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Rate</th>
-    </tr>
-    <tr>
-      <td>Bkash</td>
-      <td>USDT</td>
-      <td>1৳ = 0.009 USDT</td>
-    </tr>
-    <tr>
-      <td>Nagad</td>
-      <td>Ton Coin</td>
-      <td>1৳ = 0.007 TON</td>
-    </tr>
-    <tr>
-      <td>Rocket</td>
-      <td>USDC</td>
-      <td>1৳ = 0.009 USDC</td>
-    </tr>
-  </table>
-</div>
-
-<div class="container">
-  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
-  <ul id="history-list"></ul>
-</div>
-
-<div class="container">
-  <h2>Random Notification</h2>
-  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
-</div>
-
-<script>
-  // Dummy history data
-  const historyData = [
-    { user:"Rahim", from:"Bkash", to:"USDT", amount:"1200৳", time:"৫ মিনিট আগে" },
-    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"850৳", time:"১০ মিনিট আগে" },
-    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"2000৳", time:"১৫ মিনিট আগে" }
-  ];
-  const historyList = document.getElementById("history-list");
-  historyData.forEach(entry=>{
-    const li=document.createElement("li");
-    li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
-    historyList.appendChild(li);
-  });
-
-  // Random notification simulation
-  const messages=[
-    "Rahim just exchanged 1200৳ to USDT ✅",
-    "Nusrat converted 850৳ to Ton Coin ⚡",
-    "Sabbir exchanged 2000৳ to USDC 🔐",
-    "New user exchanged 500৳ to USDT 💬"
-  ];
-  let i=0;
-  setInterval(()=>{
-    document.getElementById("message-box").innerText="📩 "+messages[i];
-    i=(i+1)%messages.length;
-  },5000);
-</script>
-
+    /* ---------- Resize: recalc animation duration ---------- */
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        // remove animation then restart
+        historyContainer.style.animation = 'none';
+        setTimeout(startAutoScroll, 120);
+      }, 250);
+    });
+  </script>
 </body>
 </html>
