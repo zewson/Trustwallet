@@ -2,25 +2,35 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>Exchange Portal</title>
+  <title>Exchange Partner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f6f9; margin:0; padding:0; }
-    header { background:#1e3a8a; color:white; text-align:center; padding:20px; }
-    header h1 { margin:0; font-size:28px; }
-    .container { max-width:900px; margin:20px auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    h2 { margin-bottom:15px; color:#333; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; padding:0; background:#f9fafb; color:#333; }
+    header { background:#1e3a8a; color:white; text-align:center; padding:30px 20px; }
+    header h1 { margin:0; font-size:32px; }
+    header p { margin:10px 0 0; font-size:18px; }
+    .container { max-width:1000px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    h2 { margin-bottom:15px; color:#1e3a8a; }
     ul { list-style:none; padding:0; }
-    li { background:#f9fafb; border:1px solid #ddd; border-radius:6px; padding:10px; margin-bottom:10px; }
+    li { background:#f1f5f9; border:1px solid #ddd; border-radius:6px; padding:12px; margin-bottom:10px; }
     .rate-table { width:100%; border-collapse:collapse; margin-top:10px; }
-    .rate-table th, .rate-table td { border:1px solid #ddd; padding:8px; text-align:center; }
+    .rate-table th, .rate-table td { border:1px solid #ddd; padding:10px; text-align:center; }
     .rate-table th { background:#1e3a8a; color:white; }
-    .message-box { background:#e0f2fe; padding:15px; border-radius:6px; margin-top:20px; color:#1e40af; font-weight:bold; }
+    .message-box { background:#e0f2fe; padding:15px; border-radius:6px; margin-top:20px; color:#1e40af; font-weight:bold; text-align:center; }
+    .contact { text-align:center; margin-top:20px; }
+    .contact a { display:inline-block; margin:10px; padding:10px 20px; background:#1e3a8a; color:white; text-decoration:none; border-radius:6px; }
+    .contact a:hover { background:#0f172a; }
+    @media(max-width:600px){
+      header h1 { font-size:24px; }
+      header p { font-size:16px; }
+      .rate-table th, .rate-table td { font-size:14px; padding:6px; }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>কারেন্সি এক্সচেঞ্জ হোম</h1>
+  <h1>Exchange Partner</h1>
   <p>Bkash, Nagad, Rocket থেকে সহজে USDT, USDC, Ton Coin</p>
 </header>
 
@@ -35,6 +45,68 @@
 </div>
 
 <div class="container">
+  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
+  <table class="rate-table">
+    <tr>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Rate</th>
+    </tr>
+    <tr><td>Bkash</td><td>USDT</td><td>1৳ = 0.009 USDT</td></tr>
+    <tr><td>Nagad</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
+    <tr><td>Rocket</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
+    <tr><td>Bkash</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
+    <tr><td>Nagad</td><td>USDT</td><td>1৳ = 0.008 USDT</td></tr>
+    <tr><td>Rocket</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
+  </table>
+</div>
+
+<div class="container">
+  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
+  <ul id="history-list"></ul>
+</div>
+
+<div class="container">
+  <h2>Random Notification</h2>
+  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
+</div>
+
+<div class="container contact">
+  <h2>যোগাযোগ করুন</h2>
+  <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
+  <a href="https://m.me/Exchangepartner" target="_blank">Messenger @Exchangepartner</a>
+</div>
+
+<script>
+  // Dummy history data
+  const historyData = [
+    { user:"Rahim", from:"Bkash", to:"USDT", amount:"1200৳", time:"৫ মিনিট আগে" },
+    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"850৳", time:"১০ মিনিট আগে" },
+    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"2000৳", time:"১৫ মিনিট আগে" }
+  ];
+  const historyList = document.getElementById("history-list");
+  historyData.forEach(entry=>{
+    const li=document.createElement("li");
+    li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
+    historyList.appendChild(li);
+  });
+
+  // Random notification simulation
+  const messages=[
+    "Rahim just exchanged 1200৳ to USDT ✅",
+    "Nusrat converted 850৳ to Ton Coin ⚡",
+    "Sabbir exchanged 2000৳ to USDC 🔐",
+    "New user exchanged 500৳ to USDT 💬"
+  ];
+  let i=0;
+  setInterval(()=>{
+    document.getElementById("message-box").innerText="📩 "+messages[i];
+    i=(i+1)%messages.length;
+  },5000);
+</script>
+
+</body>
+</html><div class="container">
   <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
   <table class="rate-table">
     <tr>
