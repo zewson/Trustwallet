@@ -5,23 +5,76 @@
   <title>Trust Wallet BD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; padding:0; background:#f9fafb; color:#333; }
-    header { background:#1e3a8a; color:white; text-align:center; padding:30px 20px; }
-    header h1 { margin:0; font-size:32px; }
+    /* Animated gradient background */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin:0; padding:0;
+      background: linear-gradient(-45deg, #0f172a, #1e3a8a, #2563eb, #facc15);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color:#333;
+    }
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    header {
+      text-align:center;
+      padding:30px 20px;
+      color:white;
+    }
+    header h1 { margin:0; font-size:36px; font-weight:bold; }
     header p { margin:10px 0 0; font-size:18px; }
+
     .contact { margin-top:15px; }
-    .contact a { display:inline-block; margin:5px; padding:10px 20px; background:#facc15; color:#1e3a8a; text-decoration:none; border-radius:6px; font-weight:bold; }
+    .contact a {
+      display:inline-block; margin:5px; padding:10px 20px;
+      background:#facc15; color:#0f172a; text-decoration:none;
+      border-radius:6px; font-weight:bold;
+      transition:0.3s;
+    }
     .contact a:hover { background:#f59e0b; color:white; }
+
     .banner { margin-top:20px; }
     .banner img { max-width:200px; border-radius:8px; }
-    .container { max-width:1000px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+
+    .container {
+      max-width:1000px; margin:20px auto; padding:20px;
+      background:white; border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    }
     h2 { margin-bottom:15px; color:#1e3a8a; }
+
     ul { list-style:none; padding:0; }
-    li { background:#f1f5f9; border:1px solid #ddd; border-radius:6px; padding:12px; margin-bottom:10px; }
+    li {
+      background:#f1f5f9; border:1px solid #ddd;
+      border-radius:6px; padding:12px; margin-bottom:10px;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(10px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
     .rate-table { width:100%; border-collapse:collapse; margin-top:10px; }
-    .rate-table th, .rate-table td { border:1px solid #ddd; padding:10px; text-align:center; }
+    .rate-table th, .rate-table td {
+      border:1px solid #ddd; padding:10px; text-align:center;
+    }
     .rate-table th { background:#1e3a8a; color:white; }
-    .message-box { background:#e0f2fe; padding:15px; border-radius:6px; margin-top:20px; color:#1e40af; font-weight:bold; text-align:center; }
+
+    .message-box {
+      background:#e0f2fe; padding:15px; border-radius:6px;
+      margin-top:20px; color:#1e40af; font-weight:bold; text-align:center;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {transform:scale(1);}
+      50% {transform:scale(1.05);}
+      100% {transform:scale(1);}
+    }
+
     @media(max-width:600px){
       header h1 { font-size:24px; }
       header p { font-size:16px; }
@@ -35,6 +88,85 @@
   <h1>Trust Wallet BD</h1>
   <p>Bkash, Nagad, Rocket থেকে সহজে USDT, USDC, Ton Coin</p>
   
+  <!-- Contact Section -->
+  <div class="contact">
+    <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
+    <a href="https://m.me/Exchangepartner" target="_blank">Messenger @Exchangepartner</a>
+  </div>
+
+  <!-- Logo/Banner Placeholder -->
+  <div class="banner">
+    <img src="https://via.placeholder.com/200x80.png?text=Trust+Wallet+BD+Logo" alt="Trust Wallet BD Logo">
+  </div>
+</header>
+
+<div class="container">
+  <h2>কেন আমাদের থেকে এক্সচেঞ্জ করবেন?</h2>
+  <ul>
+    <li>🔐 100% Trusted Exchange</li>
+    <li>⚡ Instant Transaction</li>
+    <li>📞 24/7 Support</li>
+    <li>💬 Telegram & Messenger এ নোটিফাই</li>
+  </ul>
+</div>
+
+<div class="container">
+  <h2>বর্তমান এক্সচেঞ্জ রেট</h2>
+  <table class="rate-table">
+    <tr>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Rate</th>
+    </tr>
+    <tr><td>Bkash</td><td>USDT</td><td>1৳ = 0.009 USDT</td></tr>
+    <tr><td>Nagad</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
+    <tr><td>Rocket</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
+    <tr><td>Bkash</td><td>USDC</td><td>1৳ = 0.009 USDC</td></tr>
+    <tr><td>Nagad</td><td>USDT</td><td>1৳ = 0.008 USDT</td></tr>
+    <tr><td>Rocket</td><td>Ton Coin</td><td>1৳ = 0.007 TON</td></tr>
+  </table>
+</div>
+
+<div class="container">
+  <h2>সাম্প্রতিক এক্সচেঞ্জ হিস্ট্রি</h2>
+  <ul id="history-list"></ul>
+</div>
+
+<div class="container">
+  <h2>Random Notification</h2>
+  <div id="message-box" class="message-box">📩 Telegram/Messenger এ নোটিফিকেশন আসবে...</div>
+</div>
+
+<script>
+  // Dummy history data (100৳ থেকে 15000৳ পর্যন্ত)
+  const historyData = [
+    { user:"Rahim", from:"Bkash", to:"USDT", amount:"100৳", time:"৫ মিনিট আগে" },
+    { user:"Nusrat", from:"Nagad", to:"Ton Coin", amount:"500৳", time:"১০ মিনিট আগে" },
+    { user:"Sabbir", from:"Rocket", to:"USDC", amount:"1200৳", time:"১৫ মিনিট আগে" },
+    { user:"Karim", from:"Bkash", to:"USDT", amount:"2500৳", time:"২০ মিনিট আগে" },
+    { user:"Mitu", from:"Nagad", to:"USDC", amount:"4000৳", time:"৩০ মিনিট আগে" },
+    { user:"Shakib", from:"Rocket", to:"Ton Coin", amount:"7500৳", time:"৪০ মিনিট আগে" },
+    { user:"Jahan", from:"Bkash", to:"USDT", amount:"10000৳", time:"৫০ মিনিট আগে" },
+    { user:"Rafiq", from:"Nagad", to:"USDT", amount:"15000৳", time:"১ ঘন্টা আগে" }
+  ];
+  const historyList = document.getElementById("history-list");
+
+  // Animated history rendering
+  let index=0;
+  function showHistory(){
+    if(index < historyData.length){
+      const entry = historyData[index];
+      const li=document.createElement("li");
+      li.innerHTML=`<strong>${entry.user}</strong> ${entry.from} থেকে ${entry.to} এক্সচেঞ্জ করেছে <strong>${entry.amount}</strong> (${entry.time})`;
+      historyList.appendChild(li);
+      index++;
+    }
+  }
+  setInterval(showHistory, 2000); // প্রতি ২ সেকেন্ডে নতুন history add হবে
+
+  // Random notification simulation
+  const messages=[
+    "Rahim just exchanged 100৳ to USDT ✅",  
   <!-- Contact Section -->
   <div class="contact">
     <a href="https://t.me/Exchangepartner" target="_blank">Telegram @Exchangepartner</a>
